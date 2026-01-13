@@ -1,0 +1,20 @@
+# # File gsaved with Nlview version 6.3.8  2013-12-19 bk=1.2992 VDI=34 GEI=35
+# 
+preplace inst HelloNios.timer_0 -pg 1 -lvl 3 -y 290
+preplace inst HelloNios.SRAM -pg 1 -lvl 3 -y 30
+preplace inst HelloNios.mvp_accelerator_0 -pg 1 -lvl 3 -y 110
+preplace inst HelloNios.DEBUG -pg 1 -lvl 3 -y 190
+preplace inst HelloNios.HelloNios.cpu -pg 1
+preplace inst HelloNios.HelloNios.reset_bridge -pg 1
+preplace inst HelloNios.clk_0 -pg 1 -lvl 2 -y 30
+preplace inst HelloNios.HelloNios -pg 1 -lvl 1 -y 150
+preplace inst HelloNios -pg 1 -lvl 1 -y 40 -regy -20
+preplace inst HelloNios.HelloNios.clock_bridge -pg 1
+preplace netloc EXPORT<net_container>HelloNios</net_container>(SLAVE)clk_0.clk_in,(SLAVE)HelloNios.clk) 1 0 2 NJ 40 NJ
+preplace netloc FAN_OUT<net_container>HelloNios</net_container>(SLAVE)DEBUG.irq,(MASTER)HelloNios.irq,(SLAVE)timer_0.irq) 1 1 2 N 240 740
+preplace netloc FAN_OUT<net_container>HelloNios</net_container>(SLAVE)DEBUG.clk,(SLAVE)SRAM.clk1,(MASTER)clk_0.clk,(SLAVE)HelloNios.clk,(SLAVE)mvp_accelerator_0.clock_sink,(SLAVE)timer_0.clk) 1 0 3 60 290 NJ 180 780
+preplace netloc INTERCONNECT<net_container>HelloNios</net_container>(SLAVE)HelloNios.debug_mem_slave,(SLAVE)SRAM.s1,(MASTER)HelloNios.instruction_master,(SLAVE)mvp_accelerator_0.avalon_slave_0,(SLAVE)timer_0.s1,(SLAVE)DEBUG.avalon_jtag_slave,(MASTER)HelloNios.data_master) 1 0 3 80 310 480 200 760
+preplace netloc FAN_OUT<net_container>HelloNios</net_container>(SLAVE)DEBUG.reset,(SLAVE)HelloNios.reset,(MASTER)clk_0.clk_reset,(SLAVE)timer_0.reset,(SLAVE)mvp_accelerator_0.reset_sink,(SLAVE)SRAM.reset1) 1 0 3 100 330 NJ 330 720
+preplace netloc POINT_TO_POINT<net_container>HelloNios</net_container>(SLAVE)clk_0.clk_in_reset,(MASTER)HelloNios.debug_reset_request) 1 1 1 460
+levelinfo -pg 1 0 30 970
+levelinfo -hier HelloNios 40 220 550 820 960
